@@ -4,6 +4,8 @@
 % 优化解和解值存储在变量 x 和 val 中
 % 仅作为案例
 % --------------------------------------------
+clear all;
+clc;
 
 %% 主函数定义
 f = @(x, price) -sum(x.*price);
@@ -21,4 +23,4 @@ A = [1     1     1     0     0     0     0     0     0
 b = [1000; 1500; 2000];
 
 %% 获得在限制条件下的非线性优化解
-[x val] = fmincon(@(x) f(x, price), allocate_matrix, A, b, [], [], zeros(9, 1), [], @nonlcon)
+[x val] = fmincon(@(x) f(x, price), allocate_matrix, A, b, [], [], zeros(9, 1), [], @NonlconExample)

@@ -1,4 +1,4 @@
-function [G, Ceq] = nonlcon(x)
+function [G, Ceq] = NonlconExample(x)
 % --------------------------------------------
 % x为所选用的自变量值
 % 该函数计算fmincon中的线性或非线性限定值
