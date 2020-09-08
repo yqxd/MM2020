@@ -23,4 +23,5 @@ A = [1     1     1     0     0     0     0     0     0
 b = [1000; 1500; 2000];
 
 %% 获得在限制条件下的非线性优化解
-[x val] = fmincon(@(x) f(x, price), allocate_matrix, A, b, [], [], zeros(9, 1), [], @NonlconExample)
+options = optimset()
+[x val] = fmincon(@(x) f(x, price), allocate_matrix, A, b, [], [], zeros(9, 1), [], @NonlconExample, options)
