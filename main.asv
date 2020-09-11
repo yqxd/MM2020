@@ -1,0 +1,5 @@
+%% Main codes for MM2020
+
+%% Definitions for Variables
+ReflowOven = struct('Time', [],  'TempOfArea', [], )
+Circut = struct('Time', [], 'Axis', [], 'Temp'
