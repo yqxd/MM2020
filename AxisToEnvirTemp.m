@@ -4,7 +4,7 @@ function result = AxisToEnvirTemp(x)
 % x 为所输入的横坐标
 % ------------------------------------
     global ReflowOven Break OtherVariable
-    if x < 0 | x >= 432.5
+    if x < 0
         result = 25;
     elseif x >= 339.5
         result = 25 + (ReflowOven.Temp(8) - 25) * exp(-OtherVariable.Kair*(x - 339.5));
