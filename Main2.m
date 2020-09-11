@@ -5,10 +5,10 @@ global ReflowOven Circut Break OtherVariable;
 ReflowOven = struct('Time', [],  'Axis', AxisOfArea, 'Temp', TempOfArea);
 Circut = struct('Time', [0], 'Axis', [0], 'Temp', zeros(NumOfLayer, 1) + 25, 'EnvirTemp', [25]);
 Break = struct('Temp', [], 'Axis', AxisOfBreak);
-OtherVariable = struct('RunRate', RunRate, 'TimeBreak', TimeBreak, 'Tau', Tau, 'Kair', Kair, 'Zql', Zql, 'NumOfLayer', NumOfLayer);
+OtherVariable = struct('RunRate', RunRate, 'TimeBreak', TimeBreak, 'Tau2', Tau2, 'NumOfLayer', NumOfLayer, 'Tau2', Tau2);
 
 %% º∆À„”ÎÕºœÒªÊ÷∆
-HeatTransfer()
+HeatTransfer2()
 plot(Circut.Time, Circut.Temp)
 hold on
 plot(Circut.Time, Circut.EnvirTemp)
