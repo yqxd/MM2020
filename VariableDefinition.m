@@ -12,5 +12,5 @@ AxisOfBreak = 55.5 + [0: 9]' * 35.5;
 AxisOfBreak = [AxisOfBreak, AxisOfBreak+5];
 
 %% 定义温区的横坐标
-AxisOfArea = [0:10]' * 55.5 + 25;
-AxisOfArea = [AxisOfArea, AxisOfArea + 30.5]；
+AxisOfArea = [0:10]' * 35.5 + 25;
+AxisOfArea = [AxisOfArea, AxisOfArea + 30.5];
