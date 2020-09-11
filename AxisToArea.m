@@ -5,5 +5,5 @@ function result = AxisToArea(x)
 % 
 % ---------------------
     global ReflowOven
-    result = find(1 == ((ReflowOven.Axis(:, 1) < x) & (x < ReflowOven.Axis(:, 2))));
+    result = find(1 == ((ReflowOven.Axis(:, 1) <= x) & (x <= ReflowOven.Axis(:, 2))));
 end
