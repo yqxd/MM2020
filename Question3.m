@@ -34,23 +34,58 @@ for i = 64:80
     OtherVariable.RunRate = i / 60;
     HeatTransfer2()
     if ~CheckCondition()
-        break
+        result = 0;
+    else
+        result = CalculateArea();
     end
 end
 
-left = 74.76;
-right = 74.88;
-while right - left > 0.0001
-    mid = (left + right) / 2;
-    OtherVariable.RunRate = mid / 60;
-    HeatTransfer2()
-    if CheckCondition()
-        left = mid;
-    else
-        right = mid;
+
+
+
+
+
+%% 变量控制
+tic
+result1 = [];
+result2 = [];
+x = [182; 200; 236; 254; 73];
+count = 10;
+break1 = 5;
+break2 = 1;
+MinV = 100000;
+MinX = [182; 200; 236; 254; 73];
+while count > 0
+    for x1 = [x(1) - break1, x(1), x(1) + break1]
+        for x2 = [x(2) - break1, x(2), x(2) + break1]
+            for x3 = [x(3) - break1, x(3), x(3) + break1]
+                for x4 = [x(4) - break1, x(4), x(4) + break1]
+                    for x5 = [x(5) - break2, x(5), x(5) + break2]
+                        NowV = -Question3_Value([x1; x2; x3; x4; x5]);
+                        if (NowV ~= 0) & (NowV < MinV)
+                            MinV = NowV;
+                            MinX = [x1; x2; x3; x4; x5];
+                        end
+                        result1 = [result1, [x1; x2; x3; x4; x5; NowV]];
+                    end
+                end
+            end
+        end
     end
+    x = MinX;
+    break1 = break1 / 3;
+    break2 = break2 / 3;
+    count = count - 1;
 end
-%% 图像绘制1
+toc
+
+
+
+
+
+%% 变量控制与图像绘制1
+x = [182; 200; 236; 254; 73];
+Question3_Value(x)
 hold off
 Location = find((abs(rem(Circut.Time / 0.5, 1)) < 1e-7) |  (abs(rem(Circut.Time / 0.5, 1) - 1) < 1e-7));    % 从微分结果中选择出所需要的位置
 hold on
@@ -59,8 +94,13 @@ plot(Circut.Time, Circut.Temp(:, OtherVariable.NumOfLayer), 'b ')
 hold on
 plot(Circut.Time, Circut.EnvirTemp, 'r')
 hold on
-legend('炉内温度',  '炉温曲线');
-title('问题一：炉内环境温度曲线与炉温曲线')
+plot(1:450, 217*ones(1, 450))
+Data = Circut.Temp(:, OtherVariable.NumOfLayer);
+LocMax = find(Data == max(Data));
+plot(zeros(1, 300)+LocMax*OtherVariable.TimeBreak, 1:300)
+legend('炉内温度',  '炉温曲线', 'y = 217', ['x = arg max(y), ', num2str(CalculateArea())]);
+title('问题三：炉内环境温度曲线与炉温曲线')
+
 %% 图像绘制2 
 hold off
 plot(Circut.Time, Circut.EnvirTemp, 'r')
@@ -71,4 +111,4 @@ hold off
 plot(Circut.Time, Circut.Temp(:, OtherVariable.NumOfLayer), 'b ')
 hold on
 legend('炉温曲线');
-title('问题一：炉温曲线')
+title('问题三：炉温曲线')

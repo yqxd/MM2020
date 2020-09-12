@@ -38,7 +38,7 @@ OtherVariable = struct('RunRate', RunRate, 'TimeBreak', TimeBreak,'Tau', Tau, 'T
 %     end
 % end
 
-left = 74.76;
+left = 73;
 right = 74.88;
 while right - left > 0.0001
     mid = (left + right) / 2;

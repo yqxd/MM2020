@@ -30,11 +30,36 @@ Circut = struct('Time', [0], 'Axis', [0], 'Temp', zeros(1, NumOfLayer) + 25, 'En
 Break = struct('Temp', [], 'Axis', AxisOfBreak);
 OtherVariable = struct('RunRate', RunRate, 'TimeBreak', TimeBreak,'Tau', Tau, 'Tau2', Tau2, 'NumOfLayer', NumOfLayer, 'Thick', Thick, 'Kair', Kair, 'Kair2', Kair2);
 %% 函数运行
-OtherVariable.RateOf
-HeatTransfer2()
-CheckCondition()
-result = Circut.Temp(:, OtherVariable.NumOfLayer);
-%% 图像绘制1
+for i = 64:80
+    OtherVariable.RunRate = i / 60;
+    HeatTransfer2()
+    if ~CheckCondition()
+        result = 0;
+    else
+        result = CalculateArea();
+    end
+end
+
+
+
+
+
+
+%% 变量控制
+result1 = [];
+
+x = [182; 200; 236; 254; 73];
+break = 
+while true
+    
+AddResult = Question3_Value(x)
+
+
+
+
+%% 变量控制与图像绘制1
+x = [182; 200; 236; 254; 73];
+Question3_Value(x)
 hold off
 Location = find((abs(rem(Circut.Time / 0.5, 1)) < 1e-7) |  (abs(rem(Circut.Time / 0.5, 1) - 1) < 1e-7));    % 从微分结果中选择出所需要的位置
 hold on
@@ -43,35 +68,21 @@ plot(Circut.Time, Circut.Temp(:, OtherVariable.NumOfLayer), 'b ')
 hold on
 plot(Circut.Time, Circut.EnvirTemp, 'r')
 hold on
-legend('炉内温度',  '炉温曲线');
-title('问题一：炉内环境温度曲线与炉温曲线')
+plot(1:450, 217*ones(1, 450))
+Data = Circut.Temp(:, OtherVariable.NumOfLayer);
+LocMax = find(Data == max(Data));
+plot(zeros(1, 300)+LocMax*OtherVariable.TimeBreak, 1:300)
+legend('炉内温度',  '炉温曲线', 'y = 217', ['x = arg max(y), ', num2str(CalculateArea())]);
+title('问题三：炉内环境温度曲线与炉温曲线')
+
 %% 图像绘制2 
 hold off
 plot(Circut.Time, Circut.EnvirTemp, 'r')
 hold on
 legend('炉温曲线');
-title('炉内环境温度曲线示例')
-%% 图像绘制3
+title('炉内环境温度曲线示例')%% 图像绘制3
 hold off
 plot(Circut.Time, Circut.Temp(:, OtherVariable.NumOfLayer), 'b ')
 hold on
 legend('炉温曲线');
-title('问题一：炉温曲线')
-%% 具体坐标处温度
-MinNum = abs(Circut.Time -  111.25/OtherVariable.RunRate);
-Loc = find(MinNum == min(MinNum));
-disp(['小温区3中点处温度为：', num2str(Circut.Temp(Loc, OtherVariable.NumOfLayer))])
-MinNum = abs(Circut.Time -  202.75/OtherVariable.RunRate);
-Loc = find(MinNum == min(MinNum));
-disp(['小温区6中点处温度为：', num2str(Circut.Temp(Loc, OtherVariable.NumOfLayer))])
-MinNum = abs(Circut.Time -  233.25/OtherVariable.RunRate);
-Loc = find(MinNum == min(MinNum));
-disp(['小温区7中点处温度为：', num2str(Circut.Temp(Loc, OtherVariable.NumOfLayer))])
-MinNum = abs(Circut.Time -  279.00/OtherVariable.RunRate);
-Loc = find(MinNum == min(MinNum));
-disp(['小温区8结束处温度为：', num2str(Circut.Temp(Loc, OtherVariable.NumOfLayer))])
-%% 具体时间与温度的写入
-Time = Circut.Time(Location);
-Result = Circut.Temp(:, OtherVariable.NumOfLayer);
-Result = Result(Location);
-% csvwrite('result.csv', [Time, Result], 1, 0)
+title('问题三：炉温曲线')
