@@ -1,9 +1,10 @@
-function result = check(Data, k)
+function result = check(Data, shift, k)
     global Circut OtherVariable
     now1 = 1;
     now2 = 1;
     all = 0;
     num = 0;
+    Data(:, 1) = Data(:, 1) - shift;
     while now2 <= size(Data, 1) && now1 <= size(Circut.Time, 1)
         if abs(Circut.Time(now1) - Data(1, now2)) < 1e-4
             num = num + 1;

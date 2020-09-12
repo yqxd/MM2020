@@ -6,6 +6,10 @@ function result = AxisToEnvirTemp(x)
     global ReflowOven Break OtherVariable
     if x < 0
         result = 25;
+    elseif x <= 15
+        result = 25;
+    elseif x <= 197
+        result = (-(ReflowOven.Temp(5)-25)*exp((15-x)*OtherVariable.Kair)) + ReflowOven.Temp(5);
     elseif x >= 339.5
         result = 25 + (ReflowOven.Temp(8) - 25) * exp(-OtherVariable.Kair2*(x - 339.5));
     elseif size(AxisToBreak(x), 1) == 1
@@ -14,7 +18,5 @@ function result = AxisToEnvirTemp(x)
     elseif size(AxisToArea(x), 1) == 1
         Count = AxisToArea(x);
         result = ReflowOven.Temp(Count);
-    elseif 0 <= x & x < 25
-        result = 25 + exp(OtherVariable.Kair*(x-25))*150;
     end
 end

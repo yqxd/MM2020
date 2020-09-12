@@ -1,4 +1,4 @@
-function HeatTransfer()
+function HeatTransfer2()
     global Circut OtherVariable
     if(size(Circut.Temp, 2) ~= 1)
         Circut.Temp = zeros(1, OtherVariable.NumOfLayer) + 25;
@@ -13,7 +13,7 @@ function HeatTransfer()
     dt = OtherVariable.TimeBreak;
     dx = dt * OtherVariable.RunRate;
     count = 1;
-    while t <= 410.5
+    while t <= 435.5
         t = t + dt;
         x = x + dx;
         count = count + 1;

@@ -18,7 +18,7 @@ opts.VariableNames = ["s", "C"];
 opts.VariableTypes = ["double", "double"];
 
 % 导入数据
-Data = readtable("E:\my college\数学建模\A\附件.xlsx", opts, "UseExcel", false);
+Data = readtable("附件.xlsx", opts, "UseExcel", false);
 
 %% 转换为输出类型
 Data = table2array(Data);
