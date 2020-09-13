@@ -29,7 +29,7 @@ ReflowOven = struct('Time', [],  'Axis', AxisOfArea, 'Temp', TempOfArea);
 Circut = struct('Time', [0], 'Axis', [0], 'Temp', zeros(1, NumOfLayer) + 25, 'EnvirTemp', [25]);
 Break = struct('Temp', [], 'Axis', AxisOfBreak);
 OtherVariable = struct('RunRate', RunRate, 'TimeBreak', TimeBreak,'Tau', Tau, 'Tau2', Tau2, 'NumOfLayer', NumOfLayer, 'Thick', Thick, 'Kair', Kair, 'Kair2', Kair2);
-%% 函数运行
+%% 寻找大体范围
 % for i = 64:80
 %     OtherVariable.RunRate = i / 60;
 %     HeatTransfer2()
@@ -37,37 +37,41 @@ OtherVariable = struct('RunRate', RunRate, 'TimeBreak', TimeBreak,'Tau', Tau, 'T
 %         break
 %     end
 % end
-
-left = 73;
-right = 74.88;
-while right - left > 0.0001
-    mid = (left + right) / 2;
-    OtherVariable.RunRate = mid / 60;
-    HeatTransfer2()
-    if CheckCondition()
-        left = mid;
-    else
-        right = mid;
-    end
-end
+disp('寻找到速率的大体范围是73-75cm/min')
+%% 寻找精确范围
+% left = 73;
+% right = 75;
+% while right - left > 0.0001
+%     mid = (left + right) / 2;
+%     OtherVariable.RunRate = mid / 60;
+%     HeatTransfer2()
+%     if CheckCondition()
+%         left = mid;
+%     else
+%         right = mid;
+%     end
+% end
+disp('寻找到速率的精确范围是74.7744cm/min')
 %% 图像绘制1
-hold off
-Location = find((abs(rem(Circut.Time / 0.5, 1)) < 1e-7) |  (abs(rem(Circut.Time / 0.5, 1) - 1) < 1e-7));    % 从微分结果中选择出所需要的位置
-hold on
-plot(Circut.Time, Circut.Temp(:, OtherVariable.NumOfLayer), 'b ')
-% text(Circut.Time(Location), result(Location), '+', 'color', 'g')
-hold on
-plot(Circut.Time, Circut.EnvirTemp, 'r')
-hold on
-legend('炉内温度',  '炉温曲线');
-title('问题一：炉内环境温度曲线与炉温曲线')
+% hold off
+% Location = find((abs(rem(Circut.Time / 0.5, 1)) < 1e-7) |  (abs(rem(Circut.Time / 0.5, 1) - 1) < 1e-7));    % 从微分结果中选择出所需要的位置
+% hold on
+% plot(Circut.Time, Circut.Temp(:, OtherVariable.NumOfLayer), 'b ')
+% % text(Circut.Time(Location), result(Location), '+', 'color', 'g')
+% hold on
+% plot(Circut.Time, Circut.EnvirTemp, 'r')
+% hold on
+% legend('炉内温度',  '炉温曲线');
+% title('问题一：炉内环境温度曲线与炉温曲线')
 %% 图像绘制2 
-hold off
-plot(Circut.Time, Circut.EnvirTemp, 'r')
-hold on
-legend('炉温曲线');
-title('炉内环境温度曲线示例')
+% hold off
+% plot(Circut.Time, Circut.EnvirTemp, 'r')
+% hold on
+% legend('炉温曲线');
+% title('炉内环境温度曲线示例')
 %% 图像绘制3
+OtherVariable.RunRate = 73.7744 / 60;
+HeatTransfer2()
 hold off
 plot(Circut.Time, Circut.Temp(:, OtherVariable.NumOfLayer), 'b ')
 hold on

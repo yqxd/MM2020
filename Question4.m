@@ -60,7 +60,29 @@ OtherVariable = struct('RunRate', RunRate, 'TimeBreak', TimeBreak,'Tau', Tau, 'T
 %     count = count - 1;
 % end
 % toc
+% csvwrite('MinVQ4.csv', result1, 0, 0)
+%% 变量控制与图像绘制1
+x = [174.5001; 193.1174; 228.5001; 257.4875; 74.4959];
+-Question3_Value(x);
+MinV = '0.3856';
+hold off
+Location = find((abs(rem(Circut.Time / 0.5, 1)) < 1e-7) |  (abs(rem(Circut.Time / 0.5, 1) - 1) < 1e-7));    % 从微分结果中选择出所需要的位置
+hold on
+plot(Circut.Time, Circut.Temp(:, OtherVariable.NumOfLayer), 'b ')
+% text(Circut.Time(Location), result(Location), '+', 'color', 'g')
+hold on
+plot(Circut.Time, Circut.EnvirTemp, 'r')
+hold on
+plot(1:450, 217*ones(1, 450))
+Data = Circut.Temp(:, OtherVariable.NumOfLayer);
+LocMax = find(Data == max(Data));
+plot(zeros(1, 300)+LocMax*OtherVariable.TimeBreak, 1:300)
+legend('炉内温度',  '炉温曲线', 'y = 217', ['x = arg max(y), ', num2str(CalculateSkew())]);
+title('问题四：炉内环境温度曲线与炉温曲线')
+disp('当区间1-5温度为174.5001， 区间6温度为 193.1174， 区间7温度为228.5001， 区间8-9温度为257.4875， 运动速度为74.4959cm/min时，达到最小偏度 0.3856 ')
 
-%%
-MinX = [174.5001; 193.1174; 228.5001; 257.4875; 74.4959];
-MinV = 0.3856;
+%% 图像绘制2 
+% hold off
+% plot(Circut.Time, Circut.EnvirTemp, 'r')
+% hold on
+% legend('炉温曲线');

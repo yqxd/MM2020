@@ -1,4 +1,8 @@
 function result = CheckCondition()
+% ------------------------------------
+% 根据已知的全局变量检查是否符合Table1限制条件。用于主函数的辅助函数
+% 在不符合Table要求的取值会导致返回值0，符合则返回1
+% ------------------------------------
     global Circut OtherVariable
     result = 1;
     Slope = (Circut.Temp(2:(length(Circut.Time)), OtherVariable.NumOfLayer) - Circut.Temp(1:(length(Circut.Time)-1), OtherVariable.NumOfLayer)) / OtherVariable.TimeBreak;

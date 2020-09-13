@@ -1,4 +1,8 @@
 function HeatTransfer2()
+% ------------------------------------
+% 根据已知的全局变量计算得到模型的所有需要信息
+% 模型二主函数
+% ------------------------------------
     global Circut OtherVariable
     if(size(Circut.Temp, 2) ~= 1)
         Circut.Temp = zeros(1, OtherVariable.NumOfLayer) + 25;

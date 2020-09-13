@@ -1,7 +1,7 @@
 clear all;
 clc;
 %% 用户输入变量
-TempOfArea = [zeros(1, 5) + 173, 198, 230, 257, 257, 25, 25]';    % 输入十一个温区的温度
+TempOfArea = [zeros(1, 5) + 173, 198, 230, 257, 257, 25, 25]';          % 输入十一个温区的温度
 RunRate = 78/60;                                                        % 输入传送带移动速度
 TimeBreak = 0.02;                                                       % 定义最小时间间隔
 Tau = 0.021;                                                            % 热传导效率
@@ -34,27 +34,27 @@ HeatTransfer2()
 result = Circut.Temp(:, OtherVariable.NumOfLayer);
 %% 图像绘制1
 hold off
-Location = find((abs(rem(Circut.Time / 0.5, 1)) < 1e-7) |  (abs(rem(Circut.Time / 0.5, 1) - 1) < 1e-7));    % 从微分结果中选择出所需要的位置
+Location = find((abs(rem(Circut.Time / 16, 1)) < 1e-7) |  (abs(rem(Circut.Time / 16, 1) - 1) < 1e-7));    % 从微分结果中选择出所需要的位置
 hold on
 plot(Circut.Time, Circut.Temp(:, OtherVariable.NumOfLayer), 'b ')
-% text(Circut.Time(Location), result(Location), '+', 'color', 'g')
+text(Circut.Time(Location) - 4, result(Location), '+', 'color', 'b')
 hold on
 plot(Circut.Time, Circut.EnvirTemp, 'r')
 hold on
 legend('炉内温度',  '炉温曲线');
 title('问题一：炉内环境温度曲线与炉温曲线')
 %% 图像绘制2 
-hold off
-plot(Circut.Time, Circut.EnvirTemp, 'r')
-hold on
-legend('炉温曲线');
-title('炉内环境温度曲线示例')
+% hold off
+% plot(Circut.Time, Circut.EnvirTemp, 'r')
+% hold on
+% legend('炉温曲线');
+% title('炉内环境温度曲线示例')
 %% 图像绘制3
-hold off
-plot(Circut.Time, Circut.Temp(:, OtherVariable.NumOfLayer), 'b ')
-hold on
-legend('炉温曲线');
-title('问题一：炉温曲线')
+% hold off
+% plot(Circut.Time, Circut.Temp(:, OtherVariable.NumOfLayer), 'b ')
+% hold on
+% legend('炉温曲线');
+% title('问题一：炉温曲线')
 %% 具体坐标处温度
 MinNum = abs(Circut.Time -  111.25/OtherVariable.RunRate);
 Loc = find(MinNum == min(MinNum));
