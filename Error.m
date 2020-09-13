@@ -1,31 +1,23 @@
-function result = check(Data, shift, k)
+function result = Error(Data, shift)
 % ----------------------------------------
-% 定量检查曲线的拟合程度
+% 返回曲线的所有误差值
 % 仅可与输入的数据 Data （附录.csv） 中数据比较
 % shift设为0或者不太大的数以统一横坐标
-% k选择1或者2以计算误差平均绝对值或者均方误差
 % ----------------------------------------
     global Circut OtherVariable
     now1 = 1;
     now2 = 1;
-    all = 0;
+    result = [];
     num = 0;
     Data(:, 1) = Data(:, 1) - shift;
     while now2 <= size(Data, 1) && now1 <= size(Circut.Time, 1)
-        if abs(Circut.Time(now1) - Data(now2, 1)) < 1e-4
+        if abs(Circut.Time(now1) - Data(now2, 1)) < 1e-3
             num = num + 1;
-            if k == 1
-                all = all + abs(Circut.Temp(now1, OtherVariable.NumOfLayer) - Data(now2, 2));
-            elseif k == 2
-                all = all + abs(Circut.Temp(now1, OtherVariable.NumOfLayer) - Data(now2, 2))^2;
-            end
+            result = [result; Circut.Temp(now1, OtherVariable.NumOfLayer) - Data(now2, 2)];
             now1 = now1 + 1;
             now2 = now2 + 1;
         else
             now1 = now1 + 1;
         end
     end
-    result  = all / num;
 end
-        
-        
